@@ -1,0 +1,42 @@
+﻿@model  Vidly.ViewModels.RandomMovieViewModel
+@*@using Vidly.Models
+@model IEnumerable<Movie>*@
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List Of Movies</h2>
+
+@if (Model.Movies.Count == 0)
+{
+
+    <text>No movies yet.</text>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Movie Name</th>
+                <th>Movie Genre</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var movie in Model.Movies)
+            {
+                <tr>
+                    <td>
+                        @*@movie.Name*@
+                        @Html.ActionLink(movie.Name, "Details", "Movies", new { id = movie.Id }, null)
+                    </td>
+                    <td>@movie.MovieGenre.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+
