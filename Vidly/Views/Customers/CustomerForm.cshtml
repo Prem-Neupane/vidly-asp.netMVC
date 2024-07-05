@@ -1,0 +1,49 @@
+﻿@using Vidly.ViewModels
+@model CustomerFormViewModel
+
+@{
+    ViewBag.Title = @Model.Title;
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Title</h2>
+
+@using (Html.BeginForm("Save", "Customers"))
+{
+    @Html.ValidationSummary(true, "Please, fix the following errors.")
+    <div class="form-group">
+        @Html.LabelFor(p => p.Customer.Name)
+        @Html.TextBoxFor(p => p.Customer.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Customer.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(p => p.Customer.MembershipTypeId)
+        @Html.DropDownListFor(p => p.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select membership type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Customer.MembershipTypeId)
+    </div>
+
+    <div class="form-group">
+        <label for="@nameof(Model)_@nameof(Model.Customer.Birthdate)">Date of birth</label>
+        @Html.TextBoxFor(p => p.Customer.Birthdate, "{0:MM/dd/yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Customer.Birthdate)
+    </div>
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(p => p.Customer.IsSubscribedToNewsLetter) Subscribed to newslatter?
+        </label>
+    </div>
+    @*<div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(p => p.Customer.IsDelinquent) Is delinquent?
+        </label>
+    </div>*@
+    @Html.HiddenFor(p => p.Customer.Id)
+    @Html.AntiForgeryToken()
+    <button class="btn btn-primary" type="submit">Save</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval");
+}

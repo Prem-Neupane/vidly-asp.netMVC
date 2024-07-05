@@ -17,9 +17,11 @@ namespace Vidly.Models
         public bool IsSubscribedToNewsLetter { get; set; }
         public MembershipType MembershipType { get; set; } //navigation property //to load the object
 
+        [Display(Name = "Date of birth")]
         public DateTime? Birthdate { get; set; }
 
-        //[ForeignKey("MembershipType")]
+        [ForeignKey("MembershipType")]
+        [Display(Name = "Membership type")]
         public byte MembershipTypeId { get; set; }
     }
 

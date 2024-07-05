@@ -6,13 +6,19 @@
 }
 
 <h2>Customers</h2>
+<div class="mb-2 float-end">
+    @Html.ActionLink("Add new", "New", "Customers", null, new { @class = "btn btn-primary text-right" })
 
+</div>
+<br>
+<br>
 <table class="table table-bordered">
     <thead>
         <tr>
             <th>Name</th>
             <th>Membership Type</th>
             <th>Discount Rate</th>
+            <th colspan="2" class="text-center">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +30,12 @@
                 </td>
                 <td>@customer.MembershipType.Name</td>
                 <td>@customer.MembershipType.DiscountRate %</td>
+                <td class="text-center">
+                    @Html.ActionLink("Edit", "Edit", "Customers", new { id = customer.Id }, null)
+                </td>
+                <td class="text-center">
+                    @Html.ActionLink("Delete", "Delete", "Customers", new { id = customer.Id }, null)
+                </td>
             </tr>
         }
     </tbody>
